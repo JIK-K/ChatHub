@@ -9,12 +9,9 @@ let mainWindow: BrowserWindow | null;
 function createMainWindow(): void {
   mainWindow = new BrowserWindow({
     width: 500,
-
     height: 400,
-
     webPreferences: {
       contextIsolation: true,
-
       nodeIntegration: true,
     },
   });
@@ -25,7 +22,6 @@ function createMainWindow(): void {
 
   if (isDev) {
     mainWindow.loadURL(BASE_URL);
-
     mainWindow.webContents.openDevTools();
   } else {
     mainWindow.loadFile(path.join(__dirname, "../build/index.html"));

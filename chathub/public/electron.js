@@ -14,6 +14,7 @@ function createMainWindow() {
             nodeIntegration: true
         }
     });
+    mainWindow.setBackgroundColor("#BB2525");
     mainWindow.once("ready-to-show", function () {
         mainWindow.show();
     });

@@ -8,13 +8,12 @@ var mainWindow;
 function createMainWindow() {
     mainWindow = new electron_1.BrowserWindow({
         width: 500,
-        height: 400,
+        height: 500,
         webPreferences: {
             contextIsolation: true,
             nodeIntegration: true
         }
     });
-    mainWindow.setBackgroundColor("#BB2525");
     mainWindow.once("ready-to-show", function () {
         mainWindow.show();
     });

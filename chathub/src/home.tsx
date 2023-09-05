@@ -1,4 +1,3 @@
-// App.tsx
 import React, { useState } from "react";
 import logo from "./img/스텀프.png";
 // import "./css/App.css";
@@ -7,11 +6,12 @@ import { Center, Input, useDisclosure } from "@chakra-ui/react";
 import { Flex, Spacer } from "@chakra-ui/react";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
+import { IconButton } from "@chakra-ui/react";
 
 const App: React.FC = () => {
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
+  const [show, setShow] = React.useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,18 +23,26 @@ const App: React.FC = () => {
   };
 
   const handleLoginClick = () => {
-    console.log("ID:", id);
-    console.log("Password:", password);
+    if (id && password) {
+      console.log("ID:", id);
+      console.log("Password:", password);
+    }
+
+    setId("");
+    setPassword("");
   };
 
   return (
     <Flex
+      width="400"
+      height="500"
       flexDirection={"column"}
-      // justifyContent={"center"}
+      justifyContent={"center"}
       alignItems={"center"}
       backgroundColor={"#352F44"}
+      overflowY={"hidden"} // 스크롤바를 없애는 속성
     >
-      <Image h={100} w={100} src={logo} className="App-logo" alt="logo" />
+      <Image w={"100"} h={"100"} src={logo} className="App-logo" alt="logo" />
       <Flex flexDirection={"column"}>
         <Input
           placeholder="ID"
@@ -51,12 +59,35 @@ const App: React.FC = () => {
           value={password}
           onChange={handlePasswordChange}
           mt={"5%"}
+          type={show ? "text" : "password"}
         />
       </Flex>
 
       <Flex>
-        <Button onClick={handleLoginClick}>Login</Button>
-        <Button colorScheme="green" onClick={onOpen}>
+        <Button
+          backgroundColor="#B9B4C7"
+          color="black"
+          borderRadius="5px"
+          mt={10}
+          border="none"
+          marginRight={5}
+          fontSize="16px"
+          fontWeight="bold"
+          onClick={handleLoginClick}
+        >
+          Login
+        </Button>
+        <Button
+          backgroundColor="#B9B4C7"
+          color="black"
+          borderRadius="5px"
+          mt={10}
+          border="none"
+          marginLeft={5}
+          fontSize="16px"
+          fontWeight="bold"
+          onClick={onOpen}
+        >
           Register
         </Button>
       </Flex>

@@ -7,7 +7,7 @@ var BASE_URL = "http://localhost:3000";
 var mainWindow;
 function createMainWindow() {
     mainWindow = new electron_1.BrowserWindow({
-        width: 500,
+        width: 400,
         height: 500,
         webPreferences: {
             contextIsolation: true,
@@ -28,6 +28,7 @@ function createMainWindow() {
         mainWindow = null;
     });
     //   mainWindow.setOpacity(0.3);
+    mainWindow.setMenu(null);
 }
 electron_1.app.on("ready", function () {
     createMainWindow();

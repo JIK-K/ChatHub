@@ -8,7 +8,7 @@ let mainWindow: BrowserWindow | null;
 
 function createMainWindow(): void {
   mainWindow = new BrowserWindow({
-    width: 500,
+    width: 400,
     height: 500,
     webPreferences: {
       contextIsolation: true,
@@ -32,6 +32,7 @@ function createMainWindow(): void {
   });
 
   //   mainWindow.setOpacity(0.3);
+  mainWindow.setMenu(null);
 }
 
 app.on("ready", (): void => {

@@ -233,49 +233,28 @@ function SignUpModal(props: Prop) {
         text: "모든 항목에 올바른 값을 넣어주세요",
       });
     } else {
-      // const signUpData: UserDTO = {
-      //   userId: user.userId,
-      //   userPassword: user.userPassword,
-      //   userName: user.userName,
-      //   userBirthday: user.userBirthday,
-      //   userEmail: user.userEmail,
-      //   userNickName: user.userNickName,
-      //   userPhoneNumber: user.userPhoneNumber,
-      // };
-      // sendSignUpToServer(signUpData);
-      // // 필요한 로직 수행 후 회원가입 처리
-      // console.log("회원가입 정보:", user);
-      // Swal.fire({
-      //   icon: "success",
-      //   title: "회원가입 완료",
-      //   text: "메인화면으로 돌아가 로그인 해주세요",
-      // }).then((res) => {
-      //   if (res.isConfirmed) {
-      //     props.onClose();
-      //   }
-      // });
+      const signUpData: UserDTO = {
+        userId: user.userId,
+        userPassword: user.userPassword,
+        userName: user.userName,
+        userBirthday: user.userBirthday,
+        userEmail: user.userEmail,
+        userNickName: user.userNickName,
+        userPhoneNumber: user.userPhoneNumber,
+      };
+      sendSignUpToServer(signUpData);
+      // 필요한 로직 수행 후 회원가입 처리
+      console.log("회원가입 정보:", user);
+      Swal.fire({
+        icon: "success",
+        title: "회원가입 완료",
+        text: "메인화면으로 돌아가 로그인 해주세요",
+      }).then((res) => {
+        if (res.isConfirmed) {
+          props.onClose();
+        }
+      });
     }
-    const signUpData: UserDTO = {
-      userId: user.userId,
-      userPassword: user.userPassword,
-      userName: user.userName,
-      userBirthday: user.userBirthday,
-      userEmail: user.userEmail,
-      userNickName: user.userNickName,
-      userPhoneNumber: user.userPhoneNumber,
-    };
-    sendSignUpToServer(signUpData);
-    // 필요한 로직 수행 후 회원가입 처리
-    console.log("회원가입 정보:", user);
-    Swal.fire({
-      icon: "success",
-      title: "회원가입 완료",
-      text: "메인화면으로 돌아가 로그인 해주세요",
-    }).then((res) => {
-      if (res.isConfirmed) {
-        props.onClose();
-      }
-    });
   };
 
   return (

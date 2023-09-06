@@ -3,7 +3,7 @@ exports.__esModule = true;
 var path = require("path");
 var electron_1 = require("electron");
 var isDev = require("electron-is-dev");
-var BASE_URL = "http://localhost:3000";
+var BASE_URL = "http://localhost:4000";
 var mainWindow;
 function createMainWindow() {
     mainWindow = new electron_1.BrowserWindow({

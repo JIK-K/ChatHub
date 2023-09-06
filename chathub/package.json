@@ -28,6 +28,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "start": "set PORT=4000 && react-scripts start",
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
     "react-test": "react-scripts test",
@@ -35,7 +36,7 @@
     "start-renderer": "cross-env BROWSER=none npm run react-start",
     "start-main": "electron .",
     "compile-main": "tsc ./public/electron.ts",
-    "start-main-after-renderer": "wait-on http://localhost:3000 && npm run start-main",
+    "start-main-after-renderer": "wait-on http://localhost:4000 && electron .",
     "dev": "npm run compile-main && concurrently -n renderer, main 'npm:start-renderer' 'npm:start-main-after-renderer'",
     "pack": "npm run compile-main && npm run react-build && electron-builder --dir",
     "build": "npm run compile-main && npm run react-build && electron-builder build",
@@ -68,5 +69,6 @@
     "electron": "^26.1.0",
     "electron-builder": "^24.6.4",
     "wait-on": "^7.0.1"
-  }
+  },
+  "proxy": "http://localhost:3000"
 }

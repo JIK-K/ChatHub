@@ -8,13 +8,10 @@ let mainWindow: BrowserWindow | null;
 
 function createMainWindow(): void {
   mainWindow = new BrowserWindow({
-    width: 500,
-
-    height: 400,
-
+    width: 400,
+    height: 500,
     webPreferences: {
       contextIsolation: true,
-
       nodeIntegration: true,
     },
   });
@@ -25,7 +22,6 @@ function createMainWindow(): void {
 
   if (isDev) {
     mainWindow.loadURL(BASE_URL);
-
     mainWindow.webContents.openDevTools();
   } else {
     mainWindow.loadFile(path.join(__dirname, "../build/index.html"));
@@ -36,6 +32,7 @@ function createMainWindow(): void {
   });
 
   //   mainWindow.setOpacity(0.3);
+  mainWindow.setMenu(null);
 }
 
 app.on("ready", (): void => {

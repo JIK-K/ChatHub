@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "./img/스텀프.png";
 // import "./css/App.css";
 import RegisterForm from "./register";
@@ -7,12 +7,16 @@ import { Flex, Spacer } from "@chakra-ui/react";
 import { Button, ButtonGroup } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
 import { IconButton } from "@chakra-ui/react";
+import { LoginDTO } from "./DTOs/login.dto";
+import axios from "axios";
 
 const App: React.FC = () => {
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [show, setShow] = React.useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [testflag, settestflag] = useState(false);
 
   const handleIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setId(e.target.value);
@@ -22,7 +26,25 @@ const App: React.FC = () => {
     setPassword(e.target.value);
   };
 
+  const sendLoginToServer = async (data: LoginDTO) => {
+    try {
+      let serverURL = "/user/login";
+      let queryParams = `?id=${data.userId}&pw=${data.userPassword}`;
+      serverURL += queryParams;
+
+      const response = await axios.get(serverURL);
+
+      console.log("response:", response.data);
+    } catch (error) {
+      console.error("Error : ", error);
+    }
+  };
+
   const handleLoginClick = () => {
+    let loginData: LoginDTO = { userId: id, userPassword: password };
+
+    sendLoginToServer(loginData);
+
     if (id && password) {
       console.log("ID:", id);
       console.log("Password:", password);
@@ -31,6 +53,14 @@ const App: React.FC = () => {
     setId("");
     setPassword("");
   };
+
+  useEffect(() => {
+    if (testflag) {
+      console.log("true");
+    } else {
+      console.log("false");
+    }
+  });
 
   return (
     <Flex

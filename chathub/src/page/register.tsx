@@ -15,7 +15,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { UserDTO } from "./DTOs/user.dto";
+import { UserDTO } from "../DTOs/user.dto";
 import Swal from "sweetalert2";
 import axios from "axios";
 

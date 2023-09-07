@@ -1,6 +1,4 @@
-import { BaseDTO } from "./base.dto";
-
-export interface UserDTO extends BaseDTO {
+export interface UserDTO {
   userName: string;
   userId: string;
   userPassword: string;
@@ -8,7 +6,4 @@ export interface UserDTO extends BaseDTO {
   userBirthday: string;
   userPhoneNumber: string;
   userNickName: string;
-
-  createAt: string;
-  updateAt: string;
 }

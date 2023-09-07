@@ -17,6 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { UserDTO } from "./DTOs/user.dto";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 interface Prop {
   isOpen: boolean;
@@ -33,8 +34,6 @@ function SignUpModal(props: Prop) {
     userBirthday: "",
     userPhoneNumber: "",
     userNickName: "",
-    createAt: "",
-    updateAt: "",
   });
 
   //=======================================================================//
@@ -180,7 +179,18 @@ function SignUpModal(props: Prop) {
   };
 
   //=======================================================================//
+  const sendSignUpToServer = async (data: UserDTO) => {
+    try {
+      const serverURL = "/user";
+      const response = await axios.post(serverURL, data);
 
+      console.log("response:", response.data);
+    } catch (error) {
+      console.error("Error : ", error);
+    }
+  };
+
+  //=======================================================================//
   const handleSignUpClick = () => {
     if (!isEmailValid(user.userEmail)) {
       // alert("올바른 이메일 형식이 아닙니다.");
@@ -223,6 +233,16 @@ function SignUpModal(props: Prop) {
         text: "모든 항목에 올바른 값을 넣어주세요",
       });
     } else {
+      const signUpData: UserDTO = {
+        userId: user.userId,
+        userPassword: user.userPassword,
+        userName: user.userName,
+        userBirthday: user.userBirthday,
+        userEmail: user.userEmail,
+        userNickName: user.userNickName,
+        userPhoneNumber: user.userPhoneNumber,
+      };
+      sendSignUpToServer(signUpData);
       // 필요한 로직 수행 후 회원가입 처리
       console.log("회원가입 정보:", user);
       Swal.fire({

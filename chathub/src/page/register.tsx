@@ -262,22 +262,21 @@ function SignUpModal(props: Prop) {
       <ModalOverlay />
       <ModalContent bg="#352F44">
         <Flex
-          width="400"
-          height="500"
           flexDirection={"column"}
           justifyContent={"center"}
           alignItems={"center"}
           backgroundColor={"#352F44"}
         >
-          <ModalHeader textAlign="center" textColor="white">
-            <Text as="b">CREATE ACCOUNT</Text>
-          </ModalHeader>
-          <ModalBody mt={4}>
+          <ModalBody>
+            <Text textColor={"white"} as="b">
+              CREATE ACCOUNT
+            </Text>
             <FormControl>
-              <FormLabel textColor="#B9B4C7" as="b">
+              <Text textColor={"white"} fontSize={"xs"}>
                 ID
-              </FormLabel>
+              </Text>
               <Input
+                size="xs"
                 placeholder="ID"
                 bg={"#5C5470"}
                 textColor={"white"}
@@ -287,11 +286,12 @@ function SignUpModal(props: Prop) {
               />
             </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel textColor="#B9B4C7" as="b">
+            <FormControl>
+              <Text textColor={"white"} fontSize={"xs"}>
                 PASSWORD
-              </FormLabel>
+              </Text>
               <Input
+                size="xs"
                 type="password"
                 placeholder="PASSWORD"
                 bg={"#5C5470"}
@@ -301,11 +301,12 @@ function SignUpModal(props: Prop) {
               />
             </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel textColor="#B9B4C7" as="b">
+            <FormControl>
+              <Text textColor={"white"} fontSize={"xs"}>
                 EMAIL
-              </FormLabel>
+              </Text>
               <Input
+                size="xs"
                 placeholder="EMAIL"
                 bg={"#5C5470"}
                 textColor={"white"}
@@ -314,11 +315,12 @@ function SignUpModal(props: Prop) {
               />
             </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel textColor="#B9B4C7" as="b">
-                Name
-              </FormLabel>
+            <FormControl>
+              <Text textColor={"white"} fontSize={"xs"}>
+                NAME
+              </Text>
               <Input
+                size="xs"
                 placeholder="NAME"
                 bg={"#5C5470"}
                 textColor={"white"}
@@ -327,11 +329,12 @@ function SignUpModal(props: Prop) {
               />
             </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel textColor="#B9B4C7" as="b">
+            <FormControl>
+              <Text textColor={"white"} fontSize={"xs"}>
                 BIRTHDAY
-              </FormLabel>
+              </Text>
               <Input
+                size="xs"
                 placeholder="BIRTHDAY"
                 bg={"#5C5470"}
                 textColor={"white"}
@@ -340,11 +343,12 @@ function SignUpModal(props: Prop) {
               />
             </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel textColor="#B9B4C7" as="b">
+            <FormControl>
+              <Text textColor={"white"} fontSize={"xs"}>
                 PHONENUMBER
-              </FormLabel>
+              </Text>
               <Input
+                size="xs"
                 placeholder="PHONENUMBER"
                 bg={"#5C5470"}
                 textColor={"white"}
@@ -353,11 +357,12 @@ function SignUpModal(props: Prop) {
               />
             </FormControl>
 
-            <FormControl mt={4}>
-              <FormLabel textColor="#B9B4C7" as="b">
+            <FormControl>
+              <Text textColor={"white"} fontSize={"xs"}>
                 NICKNAME
-              </FormLabel>
+              </Text>
               <Input
+                size="xs"
                 placeholder="NICKNAME"
                 bg={"#5C5470"}
                 textColor={"white"}
@@ -365,16 +370,15 @@ function SignUpModal(props: Prop) {
                 onChange={handleNickNameChange}
               />
             </FormControl>
-          </ModalBody>
 
-          <ModalFooter justifyContent="center">
             <Button
+              size="xs"
               backgroundColor="#B9B4C7"
               color="black"
               borderRadius="5px"
-              mt={10}
+              mt={3}
               border="none"
-              marginRight={5}
+              marginRight={3}
               fontSize="16px"
               fontWeight="bold"
               onClick={props.onClose}
@@ -382,19 +386,20 @@ function SignUpModal(props: Prop) {
               Close
             </Button>
             <Button
+              size="xs"
               backgroundColor="#B9B4C7"
               color="black"
               borderRadius="5px"
-              mt={10}
+              mt={3}
               border="none"
-              marginRight={5}
+              marginRight={3}
               fontSize="16px"
               fontWeight="bold"
               onClick={handleSignUpClick}
             >
               Sign Up
             </Button>
-          </ModalFooter>
+          </ModalBody>
         </Flex>
       </ModalContent>
     </Modal>

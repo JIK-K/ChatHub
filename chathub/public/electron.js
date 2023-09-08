@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+//electron.ts
 var path = require("path");
 var electron_1 = require("electron");
 var isDev = require("electron-is-dev");
@@ -16,6 +17,10 @@ function createMainWindow() {
             nodeIntegration: true
         }
     });
+    electron_1.ipcMain.on("dbthfudqheoddl", function (event, arg) {
+        console.log(arg);
+        event.sender.send("dbthfudQkdeoddl", "zz");
+    });
     mainWindow.once("ready-to-show", function () {
         mainWindow.show();
     });
@@ -29,7 +34,6 @@ function createMainWindow() {
     mainWindow.on("closed", function () {
         mainWindow = null;
     });
-    //   mainWindow.setOpacity(0.3);
     mainWindow.setMenu(null);
 }
 electron_1.app.on("ready", function () {

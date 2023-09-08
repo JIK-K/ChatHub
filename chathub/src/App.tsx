@@ -7,15 +7,15 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 const App: React.FC = () => {
   return (
-    // <ChakraProvider>
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/mainpage" element={<MainPage />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
-    // </ChakraProvider>
+    <ChakraProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/mainpage" element={<MainPage />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    </ChakraProvider>
   );
 };
 

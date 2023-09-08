@@ -1,5 +1,6 @@
+//electron.ts
 import * as path from "path";
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import * as isDev from "electron-is-dev";
 
 const BASE_URL = "http://localhost:4000";
@@ -18,6 +19,11 @@ function createMainWindow(): void {
     },
   });
 
+  ipcMain.on("dbthfudqheoddl", (event, arg) => {
+    console.log(arg);
+    event.sender.send("dbthfudQkdeoddl", "zz");
+  });
+
   mainWindow.once("ready-to-show", () => {
     mainWindow!.show();
   });
@@ -33,7 +39,6 @@ function createMainWindow(): void {
     mainWindow = null;
   });
 
-  //   mainWindow.setOpacity(0.3);
   mainWindow.setMenu(null);
 }
 

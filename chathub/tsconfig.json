@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["electron", "node"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

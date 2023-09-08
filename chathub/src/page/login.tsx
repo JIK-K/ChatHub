@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import logo from "../img/스텀프.png";
 import SignUpModal from "./register";
-import { Center, Input, useDisclosure } from "@chakra-ui/react";
-import { Flex, Spacer } from "@chakra-ui/react";
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { Input, useDisclosure } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
-import { IconButton } from "@chakra-ui/react";
 import { LoginDTO } from "../DTOs/login.dto";
 import axios from "axios";
 import Swal from "sweetalert2";
-import MainPage from "./MainPage";
 
 const Login: React.FC = (props) => {
   const [id, setId] = useState<string>("");
@@ -80,6 +78,7 @@ const Login: React.FC = (props) => {
       <Image w={"100"} h={"100"} src={logo} className="App-logo" alt="logo" />
       <Flex flexDirection={"column"}>
         <Input
+          size="xs"
           placeholder="ID"
           bg={"#5C5470"}
           textColor={"white"}
@@ -88,6 +87,7 @@ const Login: React.FC = (props) => {
           mt={"5%"}
         />
         <Input
+          size="xs"
           placeholder="PASSWORD"
           bg={"#5C5470"}
           textColor={"white"}
@@ -99,12 +99,13 @@ const Login: React.FC = (props) => {
       </Flex>
       <Flex>
         <Button
+          size="xs"
           backgroundColor="#B9B4C7"
           color="black"
           borderRadius="5px"
-          mt={10}
+          mt={5}
           border="none"
-          marginRight={5}
+          marginRight={1}
           fontSize="16px"
           fontWeight="bold"
           onClick={handleLoginClick}
@@ -112,12 +113,13 @@ const Login: React.FC = (props) => {
           Login
         </Button>
         <Button
+          size="xs"
           backgroundColor="#B9B4C7"
           color="black"
           borderRadius="5px"
-          mt={10}
+          mt={5}
           border="none"
-          marginLeft={5}
+          marginLeft={1}
           fontSize="16px"
           fontWeight="bold"
           onClick={onOpen}

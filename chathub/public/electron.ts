@@ -19,11 +19,6 @@ function createMainWindow(): void {
     },
   });
 
-  ipcMain.on("dbthfudqheoddl", (event, arg) => {
-    console.log(arg);
-    event.sender.send("dbthfudQkdeoddl", "zz");
-  });
-
   mainWindow.once("ready-to-show", () => {
     mainWindow!.show();
   });

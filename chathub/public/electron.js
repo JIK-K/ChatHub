@@ -17,10 +17,6 @@ function createMainWindow() {
             nodeIntegration: true
         }
     });
-    electron_1.ipcMain.on("dbthfudqheoddl", function (event, arg) {
-        console.log(arg);
-        event.sender.send("dbthfudQkdeoddl", "zz");
-    });
     mainWindow.once("ready-to-show", function () {
         mainWindow.show();
     });

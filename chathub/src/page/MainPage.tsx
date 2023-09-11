@@ -3,14 +3,21 @@ import React, { useEffect, useState } from "react";
 import {
   Button,
   Flex,
-  Text,
-  Slider,
-  SliderTrack,
-  SliderFilledTrack,
-  SliderThumb,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  IconButton,
+  Container,
+  Box,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-const { ipcRenderer } = window.require("electron");
+import {
+  AddIcon,
+  ArrowBackIcon,
+  HamburgerIcon,
+  SettingsIcon,
+} from "@chakra-ui/icons";
 
 const MainPage: React.FC = (props) => {
   const navigate = useNavigate();
@@ -21,29 +28,55 @@ const MainPage: React.FC = (props) => {
     console.log("뒤로 이동");
   }
 
-  const handleOpacityChange = (newOpacity: number) => {
-    setOpacity(newOpacity);
-  };
-
   return (
-    <Flex direction="column" align="center">
-      <Text>그게 텍스트다</Text>
-      <Slider
-        aria-label="볼륨 조절 슬라이더"
-        value={opacity}
-        onChange={handleOpacityChange}
-        min={0}
-        max={100}
-        step={1}
-        width="200px"
+    <Flex
+      width="400"
+      height="500"
+      flexDirection={"column"}
+      justifyContent={"center"}
+      alignItems={"center"}
+      backgroundColor={"#352F44"}
+      overflowY={"hidden"} // 스크롤바를 없애는 속성
+    >
+      <Container
+        style={{ position: "absolute", top: "0", right: "-60%" }}
+        padding={"2"}
       >
-        <SliderTrack>
-          <SliderFilledTrack />
-        </SliderTrack>
-        <SliderThumb boxSize={6} />
-      </Slider>
-      <Text>볼륨: {opacity}</Text>
-      <Button onClick={backpage}>뒤로 가기</Button>
+        <Menu>
+          <Button
+            onClick={backpage}
+            leftIcon={<ArrowBackIcon />}
+            marginRight={"1"}
+          >
+            BACK
+          </Button>
+          <MenuButton
+            as={IconButton}
+            aria-label="Options"
+            icon={<HamburgerIcon />}
+            variant="solid"
+            backgroundColor={"#B9B4C7"}
+          />
+          <MenuList>
+            <MenuItem icon={<AddIcon />} onClick={backpage}>
+              방만들기
+            </MenuItem>
+            <MenuItem icon={<SettingsIcon />} onClick={backpage}>
+              설정
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </Container>
+      <Flex
+        width="300"
+        height="400"
+        flexDirection={"column"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        backgroundColor={"#5C5470"}
+      >
+        sfsdfdsfsfdsfdsf
+      </Flex>
     </Flex>
   );
 };

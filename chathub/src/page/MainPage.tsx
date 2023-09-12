@@ -11,7 +11,7 @@ import {
   Container,
   Box,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import {
   AddIcon,
   ArrowBackIcon,
@@ -27,6 +27,9 @@ const MainPage: React.FC = (props) => {
     navigate("/");
     console.log("뒤로 이동");
   }
+  const handleSettingClick = () => {
+    navigate("/settingpage");
+  };
 
   return (
     <Flex
@@ -61,7 +64,7 @@ const MainPage: React.FC = (props) => {
             <MenuItem icon={<AddIcon />} onClick={backpage}>
               방만들기
             </MenuItem>
-            <MenuItem icon={<SettingsIcon />} onClick={backpage}>
+            <MenuItem icon={<SettingsIcon />} onClick={handleSettingClick}>
               설정
             </MenuItem>
           </MenuList>

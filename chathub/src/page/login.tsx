@@ -59,7 +59,6 @@ const Login: React.FC = (props) => {
       console.log("ID:", id);
       console.log("Password:", password);
     }
-    <Navigate to="/mainPage" />;
 
     setId("");
     setPassword("");

@@ -1,1 +1,2 @@
 # ChatHub
+## React + Electron + TypeScript

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -19,6 +19,13 @@ import { UserDTO } from "../DTOs/user.dto";
 import Swal from "sweetalert2";
 import axios from "axios";
 
+// CSS 스타일을 변수로 정의
+const customStyles = `
+  .swal-container {
+    z-index: 9999 !important;
+  }
+`;
+
 interface Prop {
   isOpen: boolean;
   onClose: () => void;
@@ -35,6 +42,18 @@ function SignUpModal(props: Prop) {
     userPhoneNumber: "",
     userNickName: "",
   });
+
+  useEffect(() => {
+    // 컴포넌트가 마운트된 후에 스타일을 동적으로 추가
+    const styleElement = document.createElement("style");
+    styleElement.textContent = customStyles;
+    document.head.appendChild(styleElement);
+
+    // 컴포넌트가 언마운트될 때 스타일을 제거 (선택 사항)
+    return () => {
+      document.head.removeChild(styleElement);
+    };
+  }, []);
 
   //=======================================================================//
   // Id
@@ -199,6 +218,9 @@ function SignUpModal(props: Prop) {
         icon: "warning",
         title: "이메일 형식 오류",
         text: "올바른 이메일 형식이 아닙니다",
+        customClass: {
+          container: "swal-container",
+        },
       });
     } else if (!isPhoneNumberValid(user.userPhoneNumber)) {
       // alert("올바른 전화번호 형식이 아닙니다.");
@@ -207,6 +229,9 @@ function SignUpModal(props: Prop) {
         icon: "warning",
         title: "전화번호 형식 오류",
         text: "올바른 전화번호 형식이 아닙니다",
+        customClass: {
+          container: "swal-container",
+        },
       });
     } else if (!isBirthdayValid(user.userBirthday)) {
       // alert("올바른 생년월일 형식이 아닙니다.");
@@ -215,6 +240,9 @@ function SignUpModal(props: Prop) {
         icon: "warning",
         title: "생년월일 형식 오류",
         text: "올바른 생년월일 형식이 아닙니다",
+        customClass: {
+          container: "swal-container",
+        },
       });
     } else if (
       !(
@@ -231,6 +259,9 @@ function SignUpModal(props: Prop) {
         icon: "warning",
         title: "데이터 누락",
         text: "모든 항목에 올바른 값을 넣어주세요",
+        customClass: {
+          container: "swal-container",
+        },
       });
     } else {
       const signUpData: UserDTO = {
@@ -249,6 +280,9 @@ function SignUpModal(props: Prop) {
         icon: "success",
         title: "회원가입 완료",
         text: "메인화면으로 돌아가 로그인 해주세요",
+        customClass: {
+          container: "swal-container",
+        },
       }).then((res) => {
         if (res.isConfirmed) {
           props.onClose();

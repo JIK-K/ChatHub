@@ -33,23 +33,20 @@ const MainPage: React.FC = (props) => {
 
   return (
     <Flex
-      width="400"
-      height="500"
-      flexDirection={"column"}
-      justifyContent={"center"}
-      alignItems={"center"}
-      backgroundColor={"#352F44"}
-      overflowY={"hidden"} // 스크롤바를 없애는 속성
+      width={400}
+      height={500}
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      backgroundColor="#352F44"
+      position="relative"
     >
-      <Container
-        style={{ position: "absolute", top: "0", right: "-60%" }}
-        padding={"2"}
-      >
+      <Container position="fixed" top="1" left="58%">
         <Menu>
           <Button
             onClick={backpage}
             leftIcon={<ArrowBackIcon />}
-            marginRight={"1"}
+            marginRight={1}
           >
             BACK
           </Button>
@@ -58,11 +55,11 @@ const MainPage: React.FC = (props) => {
             aria-label="Options"
             icon={<HamburgerIcon />}
             variant="solid"
-            backgroundColor={"#B9B4C7"}
+            backgroundColor="#B9B4C7"
           />
           <MenuList>
             <MenuItem icon={<AddIcon />} onClick={backpage}>
-              방만들기
+              방 만들기
             </MenuItem>
             <MenuItem icon={<SettingsIcon />} onClick={handleSettingClick}>
               설정
@@ -70,16 +67,6 @@ const MainPage: React.FC = (props) => {
           </MenuList>
         </Menu>
       </Container>
-      <Flex
-        width="300"
-        height="400"
-        flexDirection={"column"}
-        justifyContent={"center"}
-        alignItems={"center"}
-        backgroundColor={"#5C5470"}
-      >
-        sfsdfdsfsfdsfdsf
-      </Flex>
     </Flex>
   );
 };

@@ -66,6 +66,50 @@ function SignUpModal(props: Prop) {
     });
   };
 
+  const checkIdData = async (data: string) => {
+    if (data.length == 0) {
+      Swal.fire({
+        icon: "warning",
+        title: "아이디 형식 확인",
+        text: "아이디를 입력해주세요.",
+        customClass: {
+          container: "swal-container",
+        },
+      });
+    } else {
+      try {
+        let serverURL = "/user/check";
+        let queryParams = `?id=${data}`;
+        serverURL += queryParams;
+
+        const response = await axios.get(serverURL);
+
+        if (response.data == true) {
+          Swal.fire({
+            icon: "success",
+            title: "아이디 중복 확인",
+            text: "사용할 수 있는 아이디 입니다.",
+            customClass: {
+              container: "swal-container",
+            },
+          });
+        } else {
+          Swal.fire({
+            icon: "warning",
+            title: "아이디 중복 확인",
+            text: "중복된 아이디 입니다.",
+            customClass: {
+              container: "swal-container",
+            },
+          });
+        }
+        console.log("response:", response.data);
+      } catch (error) {
+        console.error("Error : ", error);
+      }
+    }
+  };
+
   //=======================================================================//
   // Password
   //=======================================================================//
@@ -306,18 +350,33 @@ function SignUpModal(props: Prop) {
               CREATE ACCOUNT
             </Text>
             <FormControl>
-              <Text textColor={"white"} fontSize={"xs"}>
+              <Text textColor="white" fontSize="xs">
                 ID
               </Text>
-              <Input
-                size="xs"
-                placeholder="ID"
-                bg={"#5C5470"}
-                textColor={"white"}
-                value={user.userId}
-                onChange={handleIdChange}
-                autoFocus
-              />
+              <Flex alignItems="center">
+                <Input
+                  size="xs"
+                  placeholder="ID"
+                  bg="#5C5470"
+                  textColor="white"
+                  value={user.userId}
+                  onChange={handleIdChange}
+                  autoFocus
+                />
+                <Button
+                  size="xs"
+                  backgroundColor="#B9B4C7"
+                  color="black"
+                  borderRadius="5px"
+                  border="none"
+                  marginLeft={3}
+                  fontSize="10px"
+                  fontWeight="bold"
+                  onClick={() => checkIdData(user.userId)}
+                >
+                  중복체크
+                </Button>
+              </Flex>
             </FormControl>
 
             <FormControl>

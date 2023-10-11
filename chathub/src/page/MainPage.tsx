@@ -10,6 +10,7 @@ import {
   IconButton,
   Container,
   Box,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { Navigate, useNavigate } from "react-router-dom";
 import {
@@ -18,10 +19,12 @@ import {
   HamburgerIcon,
   SettingsIcon,
 } from "@chakra-ui/icons";
+import CreateRoomModal from "./createRoom";
 
 const MainPage: React.FC = (props) => {
   const navigate = useNavigate();
   const [opacity, setOpacity] = useState<number>(100);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   function backpage(): void {
     navigate("/");
@@ -58,7 +61,7 @@ const MainPage: React.FC = (props) => {
             backgroundColor="#B9B4C7"
           />
           <MenuList>
-            <MenuItem icon={<AddIcon />} onClick={backpage}>
+            <MenuItem icon={<AddIcon />} onClick={onOpen}>
               방 만들기
             </MenuItem>
             <MenuItem icon={<SettingsIcon />} onClick={handleSettingClick}>
@@ -67,6 +70,7 @@ const MainPage: React.FC = (props) => {
           </MenuList>
         </Menu>
       </Container>
+      {isOpen && <CreateRoomModal isOpen={isOpen} onClose={onClose} />}
     </Flex>
   );
 };

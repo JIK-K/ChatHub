@@ -9,14 +9,17 @@ import {
   MenuItem,
   IconButton,
   Container,
+  Text,
   Box,
   useDisclosure,
+  Center,
 } from "@chakra-ui/react";
 import { Navigate, useNavigate } from "react-router-dom";
 import {
   AddIcon,
   ArrowBackIcon,
   HamburgerIcon,
+  RepeatClockIcon,
   SettingsIcon,
 } from "@chakra-ui/icons";
 import CreateRoomModal from "./createRoom";
@@ -30,6 +33,7 @@ const MainPage: React.FC = (props) => {
     navigate("/");
     console.log("뒤로 이동");
   }
+  function refresh(): void {}
   const handleSettingClick = () => {
     navigate("/settingpage");
   };
@@ -44,7 +48,7 @@ const MainPage: React.FC = (props) => {
       backgroundColor="#352F44"
       position="relative"
     >
-      <Container position="fixed" top="1" left="58%">
+      <Container position="fixed" top="1" left="45%">
         <Menu>
           <Button
             onClick={backpage}
@@ -53,6 +57,11 @@ const MainPage: React.FC = (props) => {
           >
             BACK
           </Button>
+          <Button
+            onClick={refresh}
+            leftIcon={<RepeatClockIcon />}
+            marginRight={1}
+          ></Button>
           <MenuButton
             as={IconButton}
             aria-label="Options"
@@ -69,6 +78,11 @@ const MainPage: React.FC = (props) => {
             </MenuItem>
           </MenuList>
         </Menu>
+      </Container>
+      <Container maxW="md" bg="white" color="black" onClick={backpage}>
+        <Flex>
+          <Text textAlign={"center"}> 섹섹보 이게 텍스트다 </Text>
+        </Flex>
       </Container>
       {isOpen && <CreateRoomModal isOpen={isOpen} onClose={onClose} />}
     </Flex>

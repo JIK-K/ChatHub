@@ -81,8 +81,8 @@ function CreateRoomModal(props: Prop) {
         if (response.data == true) {
           Swal.fire({
             icon: "success",
-            title: "아이디 중복 확인",
-            text: "사용할 수 있는 아이디 입니다.",
+            title: "방 이름 형식 확인",
+            text: "사용할 수 있는 방 이름 입니다.",
             customClass: {
               container: "swal-container",
             },
@@ -90,8 +90,8 @@ function CreateRoomModal(props: Prop) {
         } else {
           Swal.fire({
             icon: "warning",
-            title: "아이디 중복 확인",
-            text: "중복된 아이디 입니다.",
+            title: "방 이름 중복 확인",
+            text: "중복된 방 이름 입니다.",
             customClass: {
               container: "swal-container",
             },

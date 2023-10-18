@@ -9,6 +9,7 @@ import { Image } from "@chakra-ui/react";
 import { LoginDTO } from "../DTOs/login.dto";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Data } from "../data/data";
 
 const Login: React.FC = (props) => {
   const [id, setId] = useState<string>("");
@@ -16,6 +17,7 @@ const Login: React.FC = (props) => {
   const [show, setShow] = React.useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
+  const userData = Data.getInstance();
 
   const handleIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setId(e.target.value);
@@ -35,7 +37,8 @@ const Login: React.FC = (props) => {
 
       if (response.data == true) {
         console.log("로그인 성공");
-        // <Navigate to="/mainPage" />;
+        sendGetIdToServer(data.userId);
+
         navigate("/mainpage");
       } else {
         Swal.fire({
@@ -45,6 +48,22 @@ const Login: React.FC = (props) => {
         });
       }
       console.log("response:", response.data);
+    } catch (error) {
+      console.error("Error : ", error);
+    }
+  };
+  const sendGetIdToServer = async (data: string) => {
+    try {
+      let serverURL = "/user/id";
+      let queryParams = `?id=${data}`;
+      serverURL += queryParams;
+
+      const response = await axios.get(serverURL);
+
+      if (response.data != 0) {
+        console.log("성공");
+        userData.setUser = response.data;
+      }
     } catch (error) {
       console.error("Error : ", error);
     }

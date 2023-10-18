@@ -81,7 +81,7 @@ const MainPage: React.FC = (props) => {
       </Container>
       <Container maxW="md" bg="white" color="black" onClick={backpage}>
         <Flex>
-          <Text textAlign={"center"}> 섹섹보 이게 텍스트다 </Text>
+          <Text textAlign={"center"}> 여기에 방 적고 </Text>
         </Flex>
       </Container>
       {isOpen && <CreateRoomModal isOpen={isOpen} onClose={onClose} />}

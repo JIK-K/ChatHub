@@ -35,6 +35,7 @@ interface Prop {
 function CreateRoomModal(props: Prop) {
   const userData = Data.getInstance();
   const [show, setShow] = React.useState(false);
+  const [checkId, setcheckId] = useState(false);
   const [room, setRoom] = useState<RoomDTO>({
     roomName: "",
     roomMaxUser: "",
@@ -55,27 +56,38 @@ function CreateRoomModal(props: Prop) {
   }, []);
 
   const handleCreateRoomClick = () => {
-    const createRoomData: RoomDTO = {
-      roomName: room.roomName,
-      roomMaxUser: room.roomMaxUser,
-      roomPassword: room.roomPassword,
-      userId: userData.getUser,
-    };
-    sendCreateRoomToServer(createRoomData);
-    // 필요한 로직 수행 후 회원가입 처리
-    console.log("방 정보:", room);
-    Swal.fire({
-      icon: "success",
-      title: "성공",
-      text: "방 생성에 성공 하셨습니다",
-      customClass: {
-        container: "swal-container",
-      },
-    }).then((res) => {
-      if (res.isConfirmed) {
-        props.onClose();
-      }
-    });
+    if (checkId != true) {
+      Swal.fire({
+        icon: "warning",
+        title: "데이터 누락",
+        text: "아이디 중복 확인을 눌러주세요",
+        customClass: {
+          container: "swal-container",
+        },
+      });
+    } else {
+      const createRoomData: RoomDTO = {
+        roomName: room.roomName,
+        roomMaxUser: room.roomMaxUser,
+        roomPassword: room.roomPassword,
+        userId: userData.getUser,
+      };
+      sendCreateRoomToServer(createRoomData);
+      // 필요한 로직 수행 후 회원가입 처리
+      console.log("방 정보:", room);
+      Swal.fire({
+        icon: "success",
+        title: "성공",
+        text: "방 생성에 성공 하셨습니다",
+        customClass: {
+          container: "swal-container",
+        },
+      }).then((res) => {
+        if (res.isConfirmed) {
+          props.onClose();
+        }
+      });
+    }
   };
 
   const sendCreateRoomToServer = async (data: RoomDTO) => {
@@ -117,6 +129,7 @@ function CreateRoomModal(props: Prop) {
         const response = await axios.get(serverURL);
 
         if (response.data == true) {
+          setcheckId(true);
           Swal.fire({
             icon: "success",
             title: "방 이름 형식 확인",

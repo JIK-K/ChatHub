@@ -42,6 +42,7 @@ function SignUpModal(props: Prop) {
     userPhoneNumber: "",
     userNickName: "",
   });
+  const [checkId, setcheckId] = useState(false);
 
   useEffect(() => {
     // 컴포넌트가 마운트된 후에 스타일을 동적으로 추가
@@ -85,6 +86,7 @@ function SignUpModal(props: Prop) {
         const response = await axios.get(serverURL);
 
         if (response.data == true) {
+          setcheckId(true);
           Swal.fire({
             icon: "success",
             title: "아이디 중복 확인",
@@ -303,6 +305,15 @@ function SignUpModal(props: Prop) {
         icon: "warning",
         title: "데이터 누락",
         text: "모든 항목에 올바른 값을 넣어주세요",
+        customClass: {
+          container: "swal-container",
+        },
+      });
+    } else if (checkId != true) {
+      Swal.fire({
+        icon: "warning",
+        title: "데이터 누락",
+        text: "아이디 중복 확인을 눌러주세요",
         customClass: {
           container: "swal-container",
         },

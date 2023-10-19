@@ -60,7 +60,16 @@ function CreateRoomModal(props: Prop) {
       Swal.fire({
         icon: "warning",
         title: "데이터 누락",
-        text: "아이디 중복 확인을 눌러주세요",
+        text: "방 이름 중복 확인을 눌러주세요",
+        customClass: {
+          container: "swal-container",
+        },
+      });
+    } else if (!(room.roomMaxUser && room.roomName && room.roomPassword)) {
+      Swal.fire({
+        icon: "warning",
+        title: "데이터 누락",
+        text: "모든 항목에 올바른 값을 넣어주세요",
         customClass: {
           container: "swal-container",
         },
@@ -122,8 +131,8 @@ function CreateRoomModal(props: Prop) {
       });
     } else {
       try {
-        let serverURL = "/user/check";
-        let queryParams = `?id=${data}`;
+        let serverURL = "/room/check";
+        let queryParams = `?room=${data}`;
         serverURL += queryParams;
 
         const response = await axios.get(serverURL);

@@ -36,6 +36,7 @@ function CreateRoomModal(props: Prop) {
   const userData = Data.getInstance();
   const [show, setShow] = React.useState(false);
   const [checkId, setcheckId] = useState(false);
+  const [tempName, setTempName] = useState("");
   const [room, setRoom] = useState<RoomDTO>({
     roomName: "",
     roomMaxUser: "",
@@ -61,6 +62,16 @@ function CreateRoomModal(props: Prop) {
         icon: "warning",
         title: "데이터 누락",
         text: "방 이름 중복 확인을 눌러주세요",
+        customClass: {
+          container: "swal-container",
+        },
+      });
+    } else if (room.roomMaxUser.length > 2 || parseInt(room.roomMaxUser) == 0) {
+      console.log(userData.getUser);
+      Swal.fire({
+        icon: "warning",
+        title: "데이터 오류",
+        text: "1 ~ 99 사이의 숫자를 입력해주세요",
         customClass: {
           container: "swal-container",
         },
@@ -114,10 +125,11 @@ function CreateRoomModal(props: Prop) {
   // Room Name
   //=======================================================================//
   const handleRoomNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRoom({
-      ...room,
-      roomName: e.target.value,
-    });
+    setTempName(e.target.value);
+    // setRoom({
+    //   ...room,
+    //   roomName: e.target.value,
+    // });
   };
   const checkRoomNameData = async (data: string) => {
     if (data.length == 0) {
@@ -139,6 +151,10 @@ function CreateRoomModal(props: Prop) {
 
         if (response.data == true) {
           setcheckId(true);
+          setRoom({
+            ...room,
+            roomName: tempName,
+          });
           Swal.fire({
             icon: "success",
             title: "방 이름 형식 확인",
@@ -148,6 +164,7 @@ function CreateRoomModal(props: Prop) {
             },
           });
         } else {
+          setcheckId(false);
           Swal.fire({
             icon: "warning",
             title: "방 이름 중복 확인",
@@ -206,7 +223,8 @@ function CreateRoomModal(props: Prop) {
                   placeholder="Room Name"
                   bg="#5C5470"
                   textColor="white"
-                  value={room.roomName}
+                  // value={room.roomName}
+                  value={tempName}
                   onChange={handleRoomNameChange}
                   autoFocus
                 />
@@ -219,7 +237,7 @@ function CreateRoomModal(props: Prop) {
                   marginLeft={3}
                   fontSize="10px"
                   fontWeight="bold"
-                  onClick={() => checkRoomNameData(room.roomName)}
+                  onClick={() => checkRoomNameData(tempName)}
                 >
                   중복체크
                 </Button>
@@ -237,6 +255,7 @@ function CreateRoomModal(props: Prop) {
                 value={room.roomMaxUser}
                 onChange={handleRoomMaxUserChange}
                 autoFocus
+                type="number"
               />
             </FormControl>
             <FormControl>

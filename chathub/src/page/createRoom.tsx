@@ -40,7 +40,7 @@ function CreateRoomModal(props: Prop) {
   const [room, setRoom] = useState<RoomDTO>({
     roomName: "",
     roomMaxUser: "",
-    roomConnectUser: "",
+    roomConnectUser: 0,
     roomPassword: "",
     userId: 0,
   });

@@ -25,6 +25,7 @@ import {
 import CreateRoomModal from "./createRoom";
 import axios from "axios";
 import { RoomDTO } from "../DTOs/room.dto";
+import Swal from "sweetalert2";
 
 const MainPage: React.FC = (props) => {
   const navigate = useNavigate();
@@ -56,8 +57,37 @@ const MainPage: React.FC = (props) => {
     console.log(rooms);
   }, [rooms]);
 
-  const handleRoomClick = (room: RoomDTO) => {
-    console.log(room.roomName, room.roomMaxUser);
+  const handleRoomClick = async (room: RoomDTO) => {
+    if (room.roomConnectUser >= parseInt(room.roomMaxUser)) {
+      Swal.fire({
+        icon: "warning",
+        title: "방 인원 수 오류",
+        text: "현재 방에 자리가 없습니다",
+        customClass: {
+          container: "swal-container",
+        },
+      });
+    } else {
+      try {
+        const serverURL = "/room/join";
+        const response = await axios.patch(serverURL, room);
+
+        const updatedRooms = rooms.map((r) => {
+          if (r.roomName === room.roomName) {
+            // 클릭한 방을 찾아서 roomConnectUser를 증가시킴
+            return {
+              ...r,
+              roomConnectUser: r.roomConnectUser + 1, // roomConnectUser를 1 증가
+            };
+          }
+          return r;
+        });
+
+        console.log("response:", response.data);
+      } catch (error) {
+        console.error("Error : ", error);
+      }
+    }
   };
   return (
     <Flex
@@ -125,13 +155,17 @@ const MainPage: React.FC = (props) => {
             marginTop="1"
             rounded="md"
           >
-            <Flex>
-              <Text textAlign={"center"}>{room.roomName}</Text>
-            </Flex>
-            <Flex>
-              <Text textAlign={"center"}>
-                {room.roomMaxUser}: {room.roomMaxUser}
-              </Text>
+            <Flex flexDirection="row" justifyContent="space-between">
+              <Flex>
+                <Text textAlign={"center"} as="b" fontSize="20">
+                  {room.roomName} 🖕🏻
+                </Text>
+              </Flex>
+              <Flex>
+                <Text textAlign={"center"} as="kbd">
+                  📒 {room.roomConnectUser} / {room.roomMaxUser}
+                </Text>
+              </Flex>
             </Flex>
           </Container>
         ))}

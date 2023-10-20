@@ -35,7 +35,7 @@ const Login: React.FC = (props) => {
 
       const response = await axios.get(serverURL);
 
-      if (response.data == true) {
+      if (response.data === true) {
         console.log("로그인 성공");
         sendGetIdToServer(data.userId);
 
@@ -60,7 +60,7 @@ const Login: React.FC = (props) => {
 
       const response = await axios.get(serverURL);
 
-      if (response.data != 0) {
+      if (response.data !== 0) {
         console.log("성공");
         userData.setUser = response.data;
       }
@@ -86,11 +86,11 @@ const Login: React.FC = (props) => {
   return (
     <Flex
       width="400"
-      height="500"
+      height="472"
       flexDirection={"column"}
       justifyContent={"center"}
       alignItems={"center"}
-      backgroundColor={"#352F44"}
+      backgroundColor={"#393053"}
       overflowY={"hidden"} // 스크롤바를 없애는 속성
     >
       <Image w={"100"} h={"100"} src={logo} className="App-logo" alt="logo" />

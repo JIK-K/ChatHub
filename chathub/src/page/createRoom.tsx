@@ -40,6 +40,7 @@ function CreateRoomModal(props: Prop) {
   const [room, setRoom] = useState<RoomDTO>({
     roomName: "",
     roomMaxUser: "",
+    roomConnectUser: "",
     roomPassword: "",
     userId: 0,
   });
@@ -90,6 +91,7 @@ function CreateRoomModal(props: Prop) {
         roomName: room.roomName,
         roomMaxUser: room.roomMaxUser,
         roomPassword: room.roomPassword,
+        roomConnectUser: room.roomConnectUser,
         userId: userData.getUser,
       };
       sendCreateRoomToServer(createRoomData);
@@ -202,12 +204,12 @@ function CreateRoomModal(props: Prop) {
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose}>
       <ModalOverlay />
-      <ModalContent bg="#352F44">
+      <ModalContent bg="#393053">
         <Flex
           flexDirection={"column"}
           justifyContent={"center"}
           alignItems={"center"}
-          backgroundColor={"#352F44"}
+          backgroundColor={"#393053"}
         >
           <ModalBody>
             <Text textColor={"white"} as="b">

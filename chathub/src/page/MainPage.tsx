@@ -23,32 +23,53 @@ import {
   SettingsIcon,
 } from "@chakra-ui/icons";
 import CreateRoomModal from "./createRoom";
+import axios from "axios";
+import { RoomDTO } from "../DTOs/room.dto";
 
 const MainPage: React.FC = (props) => {
   const navigate = useNavigate();
   const [opacity, setOpacity] = useState<number>(100);
+  const [rooms, setRooms] = useState<RoomDTO[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   function backpage(): void {
     navigate("/");
     console.log("뒤로 이동");
   }
-  function refresh(): void {}
+  const refresh = async () => {
+    try {
+      const serverURL = "/room/list";
+      const response = await axios.get<RoomDTO[]>(serverURL);
+
+      setRooms(response.data);
+      console.log("response:", response.data);
+    } catch (error) {
+      console.error("Error : ", error);
+    }
+  };
+
   const handleSettingClick = () => {
     navigate("/settingpage");
   };
+  useEffect(() => {
+    // 컴포넌트가 마운트되거나 rooms가 업데이트될 때 실행
+    console.log(rooms);
+  }, [rooms]);
 
+  const handleRoomClick = (room: RoomDTO) => {
+    console.log(room.roomName, room.roomMaxUser);
+  };
   return (
     <Flex
-      width={400}
-      height={500}
+      width="400"
+      height="472"
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
-      backgroundColor="#352F44"
+      backgroundColor="#393053"
       position="relative"
     >
-      <Container position="fixed" top="1" left="45%">
+      <Container position="fixed" top="1" left="36%">
         <Menu>
           <Button
             onClick={backpage}
@@ -59,9 +80,11 @@ const MainPage: React.FC = (props) => {
           </Button>
           <Button
             onClick={refresh}
-            leftIcon={<RepeatClockIcon />}
+            // leftIcon={<RepeatClockIcon />}
             marginRight={1}
-          ></Button>
+          >
+            새로고침
+          </Button>
           <MenuButton
             as={IconButton}
             aria-label="Options"
@@ -79,11 +102,41 @@ const MainPage: React.FC = (props) => {
           </MenuList>
         </Menu>
       </Container>
-      <Container maxW="md" bg="white" color="black" onClick={backpage}>
-        <Flex>
-          <Text textAlign={"center"}> 여기에 방 적고 </Text>
-        </Flex>
-      </Container>
+      <Flex
+        w={"80%"}
+        h={"100%"}
+        backgroundColor={"#393053"}
+        marginTop={"20%"}
+        marginBottom={"10%"}
+        flexDirection="column"
+        border={"2px"}
+        borderColor={"white"}
+        rounded={"md"}
+        overflowY="auto" // 내용이 넘칠 때 수직 스크롤 막대가 나타납니다.
+      >
+        {rooms.map((room, index) => (
+          <Container
+            key={index}
+            w={"95%"}
+            bg="#B9B4C7"
+            color="black"
+            onClick={() => handleRoomClick(room)}
+            marginBottom="1"
+            marginTop="1"
+            rounded="md"
+          >
+            <Flex>
+              <Text textAlign={"center"}>{room.roomName}</Text>
+            </Flex>
+            <Flex>
+              <Text textAlign={"center"}>
+                {room.roomMaxUser}: {room.roomMaxUser}
+              </Text>
+            </Flex>
+          </Container>
+        ))}
+      </Flex>
+
       {isOpen && <CreateRoomModal isOpen={isOpen} onClose={onClose} />}
     </Flex>
   );

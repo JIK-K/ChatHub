@@ -349,12 +349,12 @@ function SignUpModal(props: Prop) {
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose}>
       <ModalOverlay />
-      <ModalContent bg="#352F44">
+      <ModalContent bg="#393053">
         <Flex
           flexDirection={"column"}
           justifyContent={"center"}
           alignItems={"center"}
-          backgroundColor={"#352F44"}
+          backgroundColor={"#393053"}
         >
           <ModalBody>
             <Text textColor={"white"} as="b">

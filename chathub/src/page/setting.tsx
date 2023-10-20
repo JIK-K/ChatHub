@@ -10,12 +10,12 @@ const SettingPage: React.FC = (props) => {
 
   return (
     <Flex
-      width={400}
-      height={500}
+      width="400"
+      height="472"
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
-      backgroundColor="#352F44"
+      backgroundColor="#393053"
       position="relative"
     >
       <Container position="fixed" top="1" left="70%">

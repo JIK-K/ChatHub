@@ -3,16 +3,11 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
-  ModalCloseButton,
   Button,
   Input,
   Flex,
   FormControl,
-  FormLabel,
-  Stack,
   Text,
 } from "@chakra-ui/react";
 import { UserDTO } from "../DTOs/user.dto";
@@ -68,7 +63,7 @@ function SignUpModal(props: Prop) {
   };
 
   const checkIdData = async (data: string) => {
-    if (data.length == 0) {
+    if (data.length === 0) {
       Swal.fire({
         icon: "warning",
         title: "아이디 형식 확인",
@@ -85,7 +80,7 @@ function SignUpModal(props: Prop) {
 
         const response = await axios.get(serverURL);
 
-        if (response.data == true) {
+        if (response.data === true) {
           setcheckId(true);
           Swal.fire({
             icon: "success",
@@ -309,7 +304,7 @@ function SignUpModal(props: Prop) {
           container: "swal-container",
         },
       });
-    } else if (checkId != true) {
+    } else if (checkId !== true) {
       Swal.fire({
         icon: "warning",
         title: "데이터 누락",

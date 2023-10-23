@@ -10,22 +10,21 @@ import {
   IconButton,
   Container,
   Text,
-  Box,
   useDisclosure,
-  Center,
+  Image,
 } from "@chakra-ui/react";
 import { Navigate, useNavigate } from "react-router-dom";
 import {
   AddIcon,
   ArrowBackIcon,
   HamburgerIcon,
-  RepeatClockIcon,
   SettingsIcon,
 } from "@chakra-ui/icons";
 import CreateRoomModal from "./createRoom";
 import axios from "axios";
 import { RoomDTO } from "../DTOs/room.dto";
 import Swal from "sweetalert2";
+import logo from "../img/스텀프.png";
 
 const MainPage: React.FC = (props) => {
   const navigate = useNavigate();
@@ -43,7 +42,7 @@ const MainPage: React.FC = (props) => {
       const response = await axios.get<RoomDTO[]>(serverURL);
 
       setRooms(response.data);
-      console.log("response:", response.data);
+      // console.log("response:", response.data);
     } catch (error) {
       console.error("Error : ", error);
     }
@@ -74,7 +73,6 @@ const MainPage: React.FC = (props) => {
 
         const updatedRooms = rooms.map((r) => {
           if (r.roomName === room.roomName) {
-            // 클릭한 방을 찾아서 roomConnectUser를 증가시킴
             return {
               ...r,
               roomConnectUser: r.roomConnectUser + 1, // roomConnectUser를 1 증가
@@ -99,6 +97,9 @@ const MainPage: React.FC = (props) => {
       backgroundColor="#393053"
       position="relative"
     >
+      <Container position="fixed" top="1">
+        <Image w={"100"} h={"50"} src={logo} className="App-logo" alt="logo" />
+      </Container>
       <Container position="fixed" top="1" left="36%">
         <Menu>
           <Button
@@ -132,6 +133,7 @@ const MainPage: React.FC = (props) => {
           </MenuList>
         </Menu>
       </Container>
+
       <Flex
         w={"80%"}
         h={"100%"}
@@ -158,12 +160,12 @@ const MainPage: React.FC = (props) => {
             <Flex flexDirection="row" justifyContent="space-between">
               <Flex>
                 <Text textAlign={"center"} as="b" fontSize="20">
-                  {room.roomName} 🖕🏻
+                  {room.roomName}
                 </Text>
               </Flex>
               <Flex>
                 <Text textAlign={"center"} as="kbd">
-                  📒 {room.roomConnectUser} / {room.roomMaxUser}
+                  {room.roomConnectUser} / {room.roomMaxUser}
                 </Text>
               </Flex>
             </Flex>

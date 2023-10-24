@@ -148,11 +148,7 @@ const SettingPage: React.FC = (props) => {
           </InputGroup>
           <InputGroup size="sm">
             <InputLeftAddon w="40%" children="PASSWORD" />
-            <Input
-              placeholder="비밀번호"
-              readOnly
-              value="비밀번호 찾기 바꾸기 귀찮다"
-            />
+            <Input placeholder="비밀번호" readOnly value="관리자 문의" />
           </InputGroup>
           <InputGroup size="sm">
             <InputLeftAddon w="40%" children="Email" />
@@ -189,6 +185,13 @@ const SettingPage: React.FC = (props) => {
         >
           {buttonText}
         </Button>
+        <Box position="relative" padding="5">
+          <Divider />
+          <AbsoluteCenter fontSize="10" px="" color="white" bg="#393053">
+            참여 방 정보
+          </AbsoluteCenter>
+        </Box>
+
         <Box position="relative" padding="5">
           <Divider />
           <AbsoluteCenter fontSize="10" px="" color="white" bg="#393053">

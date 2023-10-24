@@ -42,7 +42,7 @@ function CreateRoomModal(props: Prop) {
     roomMaxUser: "",
     roomConnectUser: 0,
     roomPassword: "",
-    userId: 0,
+    user: 0,
   });
 
   useEffect(() => {
@@ -92,7 +92,7 @@ function CreateRoomModal(props: Prop) {
         roomMaxUser: room.roomMaxUser,
         roomPassword: room.roomPassword,
         roomConnectUser: room.roomConnectUser,
-        userId: userData.getUser,
+        user: userData.getUser,
       };
       sendCreateRoomToServer(createRoomData);
       // 필요한 로직 수행 후 회원가입 처리

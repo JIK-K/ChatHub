@@ -25,9 +25,11 @@ import axios from "axios";
 import { RoomDTO } from "../DTOs/room.dto";
 import Swal from "sweetalert2";
 import logo from "../img/스텀프.png";
+import { Data } from "../data/data";
 
 const MainPage: React.FC = (props) => {
   const navigate = useNavigate();
+  const userData = Data.getInstance();
   const [opacity, setOpacity] = useState<number>(100);
   const [rooms, setRooms] = useState<RoomDTO[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -56,7 +58,7 @@ const MainPage: React.FC = (props) => {
     console.log(rooms);
   }, [rooms]);
 
-  const handleRoomClick = async (room: RoomDTO) => {
+  const handleRoomClick = async (room: RoomDTO, userNumber: number) => {
     if (room.roomConnectUser >= parseInt(room.roomMaxUser)) {
       Swal.fire({
         icon: "warning",
@@ -69,13 +71,19 @@ const MainPage: React.FC = (props) => {
     } else {
       try {
         const serverURL = "/room/join";
-        const response = await axios.patch(serverURL, room);
+        const data = {
+          roomDTO: room,
+          userNumber: userData.getUser,
+        };
+
+        console.log(data);
+        const response = await axios.patch(serverURL, data);
 
         const updatedRooms = rooms.map((r) => {
           if (r.roomName === room.roomName) {
             return {
               ...r,
-              roomConnectUser: r.roomConnectUser + 1, // roomConnectUser를 1 증가
+              roomConnectUser: r.roomConnectUser + 1,
             };
           }
           return r;
@@ -87,6 +95,7 @@ const MainPage: React.FC = (props) => {
       }
     }
   };
+
   return (
     <Flex
       width="400"
@@ -152,7 +161,7 @@ const MainPage: React.FC = (props) => {
             w={"95%"}
             bg="#B9B4C7"
             color="black"
-            onClick={() => handleRoomClick(room)}
+            onClick={() => handleRoomClick(room, userData.getUser)}
             marginBottom="1"
             marginTop="1"
             rounded="md"

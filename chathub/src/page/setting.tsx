@@ -18,6 +18,8 @@ import { useState } from "react";
 import { UserDTO } from "../DTOs/user.dto";
 import axios from "axios";
 import { Data } from "../data/data";
+import { RoomDTO } from "../DTOs/room.dto";
+import { RoomDataDTO } from "../DTOs/roomData.dto";
 
 const SettingPage: React.FC = (props) => {
   const navigate = useNavigate();
@@ -33,6 +35,20 @@ const SettingPage: React.FC = (props) => {
     userPhoneNumber: "",
     userNickName: "",
   });
+  const [roomData, setRoomData] = useState<RoomDataDTO[]>([
+    {
+      roomDataId: 0,
+      connectUserId: 0,
+      connectUserName: "",
+      room: {
+        roomName: "123",
+        roomMaxUser: "",
+        roomConnectUser: 0,
+        roomPassword: "",
+        user: 0,
+      },
+    },
+  ]);
 
   function backpage(): void {
     navigate("/mainpage");
@@ -73,9 +89,17 @@ const SettingPage: React.FC = (props) => {
       let queryParams = `?id=${userData.getUser}`;
       serverURL += queryParams;
 
-      const response = await axios.get<UserDTO>(serverURL);
-      setUser(response.data);
-      console.log("response:", response.data);
+      const userResponse = await axios.get<UserDTO>(serverURL);
+      setUser(userResponse.data);
+      console.log("response:", userResponse.data);
+
+      serverURL = "room/joinlist";
+      queryParams = `?id=${userData.getUser}`;
+      serverURL += queryParams;
+
+      const roomResponse = await axios.get<RoomDataDTO[]>(serverURL);
+      setRoomData(roomResponse.data);
+      console.log("response: ", roomResponse.data);
     } catch (error) {
       console.error("Error : ", error);
     }
@@ -190,6 +214,16 @@ const SettingPage: React.FC = (props) => {
           <AbsoluteCenter fontSize="10" px="" color="white" bg="#393053">
             참여 방 정보
           </AbsoluteCenter>
+        </Box>
+        <Box bg="#B9B4C7" w="90%" fontSize="10" as="b" alignSelf="center">
+          <InputGroup size="sm">
+            <InputLeftAddon w="40%" children="NickName" />
+            <Input
+              placeholder="방 이름"
+              readOnly={!isEditable}
+              value={roomData[0].room.roomName}
+            />
+          </InputGroup>
         </Box>
 
         <Box position="relative" padding="5">

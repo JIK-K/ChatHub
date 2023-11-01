@@ -3,16 +3,11 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
-  ModalCloseButton,
   Button,
   Input,
   Flex,
   FormControl,
-  FormLabel,
-  Stack,
   Text,
 } from "@chakra-ui/react";
 import Swal from "sweetalert2";
@@ -42,7 +37,7 @@ function CreateRoomModal(props: Prop) {
     roomMaxUser: "",
     roomConnectUser: 0,
     roomPassword: "",
-    user: 0,
+    user: -1,
   });
 
   useEffect(() => {
@@ -58,7 +53,7 @@ function CreateRoomModal(props: Prop) {
   }, []);
 
   const handleCreateRoomClick = () => {
-    if (checkId != true) {
+    if (checkId !== true) {
       Swal.fire({
         icon: "warning",
         title: "데이터 누락",
@@ -67,7 +62,10 @@ function CreateRoomModal(props: Prop) {
           container: "swal-container",
         },
       });
-    } else if (room.roomMaxUser.length > 2 || parseInt(room.roomMaxUser) == 0) {
+    } else if (
+      room.roomMaxUser.length > 2 ||
+      parseInt(room.roomMaxUser) === 0
+    ) {
       console.log(userData.getUser);
       Swal.fire({
         icon: "warning",
@@ -134,7 +132,7 @@ function CreateRoomModal(props: Prop) {
     // });
   };
   const checkRoomNameData = async (data: string) => {
-    if (data.length == 0) {
+    if (data.length === 0) {
       Swal.fire({
         icon: "warning",
         title: "방 이름 형식 확인",
@@ -151,7 +149,7 @@ function CreateRoomModal(props: Prop) {
 
         const response = await axios.get(serverURL);
 
-        if (response.data == true) {
+        if (response.data === true) {
           setcheckId(true);
           setRoom({
             ...room,
